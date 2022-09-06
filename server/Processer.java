@@ -19,6 +19,7 @@ public class Processer extends Thread{
         try {
             while(true){
                 DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 StringBuilder stringBuilder = new StringBuilder();
                 String str = null;
                 while(in.available()!=0){
@@ -27,12 +28,12 @@ public class Processer extends Thread{
                     String[] args = stringBuilder.toString().trim().split(" ");
                     for(String i:args){
                         System.out.println("args: "+i);
+                        out.writeUTF("args: "+i);
                     }
                     String resGrep = new GrepImpl().grep(args);
                     System.out.println("resGrep: ");
                     System.out.println(resGrep);
 
-                    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                     out.writeUTF(resGrep);
                     out.flush();
                     System.out.println("write over");
