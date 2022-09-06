@@ -2,9 +2,7 @@ package api.impl;
 
 import api.Grep;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class GrepImpl implements Grep {
     private static Process process = null;
@@ -12,12 +10,16 @@ public class GrepImpl implements Grep {
     @Override
     public String grep(String[] args) {
         try{
+
             process = Runtime.getRuntime().exec(args);
-            BufferedInputStream in = new BufferedInputStream(process.getInputStream());
-            BufferedReader rd = new BufferedReader(new InputStreamReader(in));
-            String str = null;
-            while((str = rd.readLine()) != null){
-                stringBuilder.append(str);
+            DataInputStream error = new DataInputStream(process.getErrorStream());
+            System.out.println("error: ");
+            while(error.available() != 0){
+                System.out.println(error.readUTF());
+            }
+            DataInputStream in = new DataInputStream(process.getInputStream());
+            while(in.available() != 0){
+                stringBuilder.append(in.readUTF());
                 stringBuilder.append("\n");
             }
             process.waitFor();

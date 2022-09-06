@@ -6,7 +6,7 @@ public class client {
         Socket socket = new Socket("localhost",8866);
         OutputStream outToServer = socket.getOutputStream();
         DataOutputStream out = new DataOutputStream(outToServer);
-        String cmd = "ipconfig";
+        String cmd = "findstr \"1\" C:\\Users\\XUMAOJUN\\Desktop\\TE461\\1.txt";
         System.out.println(cmd);
         out.writeUTF(cmd);
         out.flush();
@@ -17,7 +17,6 @@ public class client {
         }
         while(in.available()!=0){
             System.out.println("服务器响应： " + in.readUTF());
-            System.out.println(in.available());
         }
         socket.close();
     }
