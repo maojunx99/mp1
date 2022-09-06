@@ -38,6 +38,7 @@ public class Processer extends Thread{
                 out.flush();
                 System.out.println("write over");
             }
+            socket.close();
         }catch (IOException ex) {
             throw new RuntimeException(ex);
         }
