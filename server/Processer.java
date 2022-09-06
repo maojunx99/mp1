@@ -23,13 +23,16 @@ public class Processer extends Thread{
             String str = null;
             while (in.available() != 0) {
                 str = in.readUTF();
-                stringBuilder.append("sh -c ");
+//                stringBuilder.append("sh -c ");
                 stringBuilder.append(str);
-                String[] args = stringBuilder.toString().trim().split(" ");
+//                String[] args = stringBuilder.toString().trim().split(" ");
+
+                String [] args={"bin/sh","-c",stringBuilder.toString()};
                 for(String i:args){
                     System.out.println("args: "+i);
                     out.writeUTF("args: "+i);
                 }
+
                 String resGrep = new GrepImpl().grep(args);
                 System.out.println("resGrep: ");
                 System.out.println(resGrep);
