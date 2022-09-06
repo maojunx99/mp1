@@ -2,9 +2,12 @@ package server;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +17,7 @@ public class Server {
     private static int port = 8866;
     private static ThreadPoolExecutor threadPoolExecutor = null;
     private static int corePoolSize = 10;
-    private static int maximumPoolSize = 15;
+    private static int maximumPoolSize = Integer.MAX_VALUE/2;
 
     public static void main(String [] args) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -24,7 +27,6 @@ public class Server {
             try{
                 System.out.println("listening on Port: "+ port);
                 Socket socket = serverSocket.accept();
-//                socket.setSoTimeout(5000);
                 threadPoolExecutor.execute(new Processer(socket));
             }catch (SocketException e){
                 e.printStackTrace();

@@ -19,17 +19,17 @@ public class Processer extends Thread {
     public void run() {
         try {
             socket.setSoTimeout(3000);
-            DataInputStream in = new DataInputStream(socket.getInputStream());
+            InputStream inputStream = socket.getInputStream();
+            DataInputStream in = new DataInputStream(inputStream);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             StringBuilder stringBuilder = new StringBuilder();
             String str = null;
             while (true) {
                 str = in.readUTF();
                 stringBuilder.append(str);
-                String[] args = {"sh", "-c", stringBuilder.toString()};
+                String[] args = {"sh", "-c",stringBuilder.toString()};
                 for (String i : args) {
                     System.out.println("args: " + i);
-                    out.writeUTF("args: " + i);
                 }
                 String resGrep = new GrepImpl().grep(args);
                 System.out.println("resGrep: ");
