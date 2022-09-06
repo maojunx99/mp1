@@ -4,7 +4,7 @@ import java.net.Socket;
 public class client {
     public static void main(String[] args) throws IOException, InterruptedException {
 //        fa22-cs425-3801.cs.illinois.edu
-        Socket socket = new Socket("fa22-cs425-3801.cs.illinois.edu",8866);
+        Socket socket = new Socket("localhost",8866);
         OutputStream outToServer = socket.getOutputStream();
         DataOutputStream out = new DataOutputStream(outToServer);
 //        findstr "1" C:\Users\XUMAOJUN\Desktop\TE461\1.txt

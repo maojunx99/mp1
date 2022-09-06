@@ -24,6 +24,7 @@ public class Server {
             try{
                 System.out.println("listening on Port: "+ port);
                 Socket socket = serverSocket.accept();
+//                socket.setSoTimeout(5000);
                 threadPoolExecutor.execute(new Processer(socket));
             }catch (SocketException e){
                 e.printStackTrace();
