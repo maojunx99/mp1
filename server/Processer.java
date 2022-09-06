@@ -23,7 +23,7 @@ public class Processer extends Thread{
             String str = null;
             while (in.available() != 0) {
                 str = in.readUTF();
-                stringBuilder.append("sh -c");
+                stringBuilder.append("sh -c ");
                 stringBuilder.append(str);
                 String[] args = stringBuilder.toString().trim().split(" ");
                 for(String i:args){

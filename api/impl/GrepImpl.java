@@ -10,7 +10,6 @@ public class GrepImpl implements Grep {
     @Override
     public String grep(String[] args) {
         try{
-
             process = Runtime.getRuntime().exec(args);
             DataInputStream error = new DataInputStream(process.getErrorStream());
             System.out.println("error: ");
