@@ -11,14 +11,11 @@ public class GrepImpl implements Grep {
     public String grep(String[] args) {
         try{
             process = Runtime.getRuntime().exec(args);
-//            DataInputStream error = new DataInputStream(process.getErrorStream());
-//            System.out.println("error: ");
-//            while(error.available() != 0){
-//                System.out.println(error.readUTF());
-//            }
-            DataInputStream in = new DataInputStream(process.getInputStream());
-            while(in.available() != 0){
-                stringBuilder.append(in.readUTF());
+            BufferedInputStream in = new BufferedInputStream(process.getInputStream());
+            BufferedReader rd = new BufferedReader(new InputStreamReader(in));
+            String str = null;
+            while((str = rd.readLine()) != null){
+                stringBuilder.append(str);
                 stringBuilder.append("\n");
             }
             process.waitFor();

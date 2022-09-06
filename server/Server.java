@@ -13,8 +13,8 @@ public class Server {
     private static ServerSocket serverSocket =null;
     private static int port = 8866;
     private static ThreadPoolExecutor threadPoolExecutor = null;
-    private static int corePoolSize = 5;
-    private static int maximumPoolSize = 10;
+    private static int corePoolSize = 10;
+    private static int maximumPoolSize = 15;
 
     public static void main(String [] args) throws IOException {
         serverSocket = new ServerSocket(port);
