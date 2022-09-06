@@ -27,7 +27,7 @@ public class Processer extends Thread{
                 stringBuilder.append(str);
 //                String[] args = stringBuilder.toString().trim().split(" ");
 
-                String [] args={"bin/sh","-c",stringBuilder.toString()};
+                String [] args={"sh","-c",stringBuilder.toString()};
                 for(String i:args){
                     System.out.println("args: "+i);
                     out.writeUTF("args: "+i);
